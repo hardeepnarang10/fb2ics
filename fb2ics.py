@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+from include.meta.__init__ import *
+
 import os
 from sys import path
 
