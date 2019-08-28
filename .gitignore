@@ -1,0 +1,14 @@
+# Don't commit test data/resources.
+*.html
+*.ics
+
+# Avoid committing dev-units and virtual environment to production.
+dev-units/*
+output/*
+resources/*
+venv/*
+
+# Byte-compiled / optimized / DLL files
+.idea/*
+__pycache__/*
+*.pyc
