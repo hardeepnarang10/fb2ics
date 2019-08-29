@@ -43,6 +43,12 @@ This tool **does not** require facebook credentials.
    `python fb2ics.py`
 6. Check 'output' folder for .ical file. 
 
+## Version
+
+Version update: v1.1.0 released.
+
+- [Issue #1 resolved](../../issues/1).
+
 ## Contributions
 
 Contributions are welcome.
