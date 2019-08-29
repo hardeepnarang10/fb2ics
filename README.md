@@ -45,9 +45,9 @@ This tool **does not** require facebook credentials.
 
 ## Version
 
-Version update: v1.1.0 released.
+Version update: v1.1.0 released:
 
-- [Issue #1 resolved](../../issues/1).
+- [Resolved: Issue #1](../../issues/1).
 
 ## Contributions
 
@@ -56,4 +56,4 @@ Make a [pull request](../../pulls).
 
 ## Licence
 
-MIT License
+MIT License.
