@@ -23,7 +23,7 @@ This tool **does not** require facebook credentials.
 
 - python3.6+ (and all required python3 modules)
 - Saved <a href="https://www.facebook.com/events/birthdays/">facebook birthdays page</a>.
-- ~~pip modules:~~ Although still required, packages are automatically handled by 'Install.bat' and specified in 'requirements.txt' file.
+- ~~pip modules:~~ Although still required, packages are automatically handled by 'Installer_Windows.bat' (in Windows) and 'Installer_Linux.sh' (in Linux) and specified in 'requirements.txt' file.
   - ~~python-dateutil~~
   - ~~ics~~
   - ~~xeger~~
@@ -39,13 +39,12 @@ This tool **does not** require facebook credentials.
    
    - Visit <a href=" https://www.facebook.com/events/birthdays/">facebook birthdays page</a>.
    - **Scroll till the end (must reach the current month of next year)**.
-- Save page (Press Ctrl + S or Command +S).
-   
+   - Save page (Press Ctrl + S or Command +S).
 3. Copy the saved HTML file to 'resources' folder in the project directory.
    (**HTML file must be saved the same day this script is executed**).
 
 4. Windows users run `Installer_Windows.bat` file.
-   Linux users run `Installer_Linux.sh` file. (May need to issue `chmod +x Installer_Linux.sh` command first).
+   Linux users run `Installer_Linux.sh` file. (Linux users may need to issue `chmod +x Installer_Linux.sh` command first).
 
 5. Check 'output' folder for .ical file. 
 
