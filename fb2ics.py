@@ -18,11 +18,11 @@ import include.fetch_html as path_finder
 import include.parser as parser
 import include.scraper as scraper
 
-RESOURCE_PATH = r".\resources"
+RESOURCE_PATH = "./resources"
 SAVE_DIR = "output"
 OUTPUT_FILE = "facebook_birthdays.ics"
 INSTRUCTION_STRING = "\nGoto 'www.facebook.com/events/birthdays/' Scroll down to the bottom and save the webpage in '"\
-                     + RESOURCE_PATH.strip(".\\") + "' folder."
+                     + RESOURCE_PATH.strip(".\\").strip("/") + "' folder."
 
 # Search for HTML file(s) in RESOURCE_PATH directory.
 FILEPATH = path_finder.target_file(RESOURCE_PATH, INSTRUCTION_STRING)
@@ -62,7 +62,7 @@ def main():
 
     # Check if ICS file written.
     if os.path.isfile(OUTPUT_FILE):
-        print("\n\nProcess completed successfully.\n\nCheck " + SAVE_DIR + " folder for '" + OUTPUT_FILE + "' file.")
+        print("\n\nProcess completed successfully.\n\nCheck '" + SAVE_DIR + "'' folder for '" + OUTPUT_FILE + "' file.")
 
 
 def flat_list_to_tuple_list(flat_list):
