@@ -1,8 +1,8 @@
 <p align="center">
-<img src="https://i.imgur.com/DdzpT8O.png" height="96px" width="96px"/>
+<img src="https://i.imgur.com/ToHPLjD.png" height="110px" width="auto"/>
 <br/>
 <h3 align="center">fb2ics</h3>
-<p align="center">Facebook Birthdays to ICS (Calendar) File.</p>
+<p align="center">Facebook Birthdays to ICS (Calendar) File</p>
 <h2></h2>
 </p>
 
@@ -22,27 +22,32 @@ This tool **does not** require facebook credentials.
 ## Requirements
 
 - python3.6+ (and all required python3 modules)
-- pip modules:
-  - python-dateutil
-  - ics
-  - xeger
 - Saved <a href="https://www.facebook.com/events/birthdays/">facebook birthdays page</a>.
+- ~~pip modules:~~ Although still required, packages are automatically handled by 'Install.bat' and specified in 'requirements.txt' file.
+  - ~~python-dateutil~~
+  - ~~ics~~
+  - ~~xeger~~
 
 ## Instructions
 
 1. Clone repo  
    `git clone https://github.com/hardeepnarang10/fb2ics.git`
+   
+   **Or simply click [here](https://codeload.github.com/hardeepnarang10/fb2ics/zip/master) to download zip file**. Extract it's content.
+   
 2. Save Facebook Birthdays page:
-   1. Visit <a href=" https://www.facebook.com/events/birthdays/">facebook birthdays page</a>.
-   2. **Scroll till the end (must reach the current month of next year)**.
-   3. Save page.
+   
+   - Visit <a href=" https://www.facebook.com/events/birthdays/">facebook birthdays page</a>.
+   - **Scroll till the end (must reach the current month of next year)**.
+- Save page (Press Ctrl + S or Command +S).
+   
 3. Copy the saved HTML file to 'resources' folder in the project directory.
    (**HTML file must be saved the same day this script is executed**).
-4. Install requirements:
-   `pip install -r requirements.txt`
-5. Run script manually:
-   `python fb2ics.py`
-6. Check 'output' folder for .ical file. 
+
+4. Windows users run `Installer_Windows.bat` file.
+   Linux users run `Installer_Linux.sh` file. (May need to issue `chmod +x Installer_Linux.sh` command first).
+
+5. Check 'output' folder for .ical file. 
 
 ## Version
 

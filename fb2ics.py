@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
 
-from include.meta.__init__ import *
-
 import os
 from sys import path
+
+# Set CWD to project directory.
+os.chdir(path[0])
+
+from include.meta.__init__ import *
 
 try:
     from xeger import Xeger
@@ -22,7 +25,7 @@ RESOURCE_PATH = "./resources"
 SAVE_DIR = "output"
 OUTPUT_FILE = "facebook_birthdays.ics"
 INSTRUCTION_STRING = "\nGoto 'www.facebook.com/events/birthdays/' Scroll down to the bottom and save the webpage in '"\
-                     + RESOURCE_PATH.strip(".\\").strip("/") + "' folder."
+                     + RESOURCE_PATH.strip(".\\").strip("/") + "' folder.\n"
 
 # Search for HTML file(s) in RESOURCE_PATH directory.
 FILEPATH = path_finder.target_file(RESOURCE_PATH, INSTRUCTION_STRING)
@@ -31,6 +34,7 @@ FILEPATH = path_finder.target_file(RESOURCE_PATH, INSTRUCTION_STRING)
 def main():
 
     # Set CWD to project directory.
+    # Redundancy on-purpose: in case main() is called externally.
     os.chdir(path[0])
 
     # Get string with birthday info. Performance optimizer.
@@ -62,7 +66,7 @@ def main():
 
     # Check if ICS file written.
     if os.path.isfile(OUTPUT_FILE):
-        print("\n\nProcess completed successfully.\n\nCheck '" + SAVE_DIR + "'' folder for '" + OUTPUT_FILE + "' file.")
+        print("\n\nProcess completed successfully.\n\nCheck '" + SAVE_DIR + "' folder for '" + OUTPUT_FILE + "' file.\n\n")
 
 
 def flat_list_to_tuple_list(flat_list):
