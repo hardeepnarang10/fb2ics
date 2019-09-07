@@ -2,6 +2,9 @@ import datetime as dt
 from re import findall
 
 
+WEEKDAYS = ("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
+
+
 def scrape_line_selector(file_name):
     html_file = open(file_name, mode='r', encoding="utf-8")
     raw_content = html_file.readlines()
@@ -43,10 +46,9 @@ def name_date_scraper(raw_list):
 def name_day_scraper(raw_list):
     name_day = findall(r'\w*\s?\w*\s\w+\s\(\w+\)', raw_list)
     bday_list = []
-    WEEKDAYS = ("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
     for each_element in name_day:
         name = each_element[0:each_element.index('(')]
-        date = WEEKDAYS.index(each_element[(each_element.index('(')+1):each_element.index(')')])
+        date = each_element[(each_element.index('(') + 1):each_element.index(')')]
         if (name + get_bday(date)) not in bday_list:
             bday_list.append(name + get_bday(date))
     return bday_list
@@ -54,6 +56,8 @@ def name_day_scraper(raw_list):
 
 def get_bday(day_of_the_week):
     present_day = dt.date(dt.datetime.now().year, dt.datetime.now().month, dt.datetime.now().day).weekday()
-    difference_in_date = abs(day_of_the_week - present_day) if (day_of_the_week - present_day) else 7
+    two_weeks = list(WEEKDAYS + WEEKDAYS)
+    two_weeks.remove(day_of_the_week)
+    difference_in_date = two_weeks.index(day_of_the_week) - two_weeks.index(WEEKDAYS[present_day])
     bday_date = dt.datetime.now() + dt.timedelta(days=difference_in_date)
     return ('(' + str(bday_date.month) + '/' + str(bday_date.day) + ')')

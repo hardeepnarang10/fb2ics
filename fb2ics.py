@@ -23,7 +23,7 @@ except ModuleNotFoundError:
 
 RESOURCE_PATH = "./resources"
 SAVE_DIR = "output"
-OUTPUT_FILE = "facebook_birthdays_" + str(datetime.now()).replace('-', '').replace(':', '').replace(' ', '').replace('.', '') + ".ics"
+OUTPUT_FILE = "facebook_birthdays.ics"
 INSTRUCTION_STRING = "\nGoto 'www.facebook.com/events/birthdays/',"\
                     + " remember to SCROLL DOWN TO THE BOTTOM and save the webpage in '"\
                      + RESOURCE_PATH.strip(".\\").strip("/") + "' folder.\n"
@@ -47,10 +47,9 @@ def main():
     # Check for birthday info in HTML file. Raise ValueError if info not found.
     try:
         if not scrape_line:
-        print("\nInvalid input.")
+            raise ValueError('Invalid input. ' + filename + ' does not contain birthday info.', INSTRUCTION_STRING)
     except ValueError as valerr:
-        print('\n' + valerr.args[0])
-        print(valerr.args[1])
+        print('\n' + valerr.args[0] + '\n' + valerr.args[1])
         exit(-12)
 
     # Scrape list with birthday info from string.
