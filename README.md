@@ -69,7 +69,7 @@ Version update: v1.1.0 release:
 
 - ~~[Resolved: Issue #1](../../issues/1)~~
   - September 9, 2019 Update: Issue wasn't completely resolved - as pointed out [here](../../issues/1#issuecomment-529092754).
-  - Resolved in v2.1.0: Commit ([7b30d65](https://github.com/hardeepnarang10/fb2ics/commit/7b30d65e530d81b7a88b6797bef8e47f88bb0fbe)).
+  - Resolved in v2.1.0: Commit ([8cdc02f](https://github.com/hardeepnarang10/fb2ics/commit/8cdc02fc35fec0839029c1231f3cd4a44521bd8e)).
 
 ## Contributions
 
