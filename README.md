@@ -22,6 +22,7 @@ This tool **does not** require facebook credentials.
 ## Requirements
 
 - python3.6+ (and all required python3 modules)
+  (<a href="https://www.python.org/ftp/python/3.7.4/python-3.7.4.exe">Download Python 3.7.4</a>)
 - Saved <a href="https://www.facebook.com/events/birthdays/">facebook birthdays page</a>.
 - ~~pip modules:~~ Although still required, packages are automatically handled by 'Installer_Windows.bat' (in Windows) and 'Installer_Linux.sh' (in Linux) and specified in 'requirements.txt' file.
   - ~~python-dateutil~~
@@ -29,6 +30,9 @@ This tool **does not** require facebook credentials.
   - ~~xeger~~
 
 ## Instructions
+
+(Make sure you have python installed on your system)
+**Check 'Add Python 3.x to PATH' during installation**.
 
 1. Clone repo  
    `git clone https://github.com/hardeepnarang10/fb2ics.git`
@@ -44,20 +48,28 @@ This tool **does not** require facebook credentials.
    (**HTML file must be saved the same day this script is executed**).
 
 4. Windows users run `Installer_Windows.bat` file.
-   Linux users run `Installer_Linux.sh` file. (Linux users may need to issue `chmod +x Installer_Linux.sh` command first).
+   Linux (and Mac) users run `Installer_Linux.sh` file. (Linux users may need to issue `chmod +x Installer_Linux.sh` command first).
 
 5. Check 'output' folder for .ical file. 
 
 ## Version
 
-Version update: v2.0.0 released:
+Version update: v2.1.0 release:
+
+- Extended locale support.
+- [Resolved: Issue #4](../../issues/4).
+- [Resolved: Issue #1](../../issues/1).
+
+Version update: v2.0.0 release:
 
 - Crossplatform support (Mac, Linux, Windows).
 - [Resolved: Issue #3](../../issues/3).
 
-Version update: v1.1.0 released:
+Version update: v1.1.0 release:
 
-- [Resolved: Issue #1](../../issues/1).
+- ~~[Resolved: Issue #1](../../issues/1)~~
+  - September 9, 2019 Update: Issue wasn't completely resolved - as pointed out [here](../../issues/1#issuecomment-529092754).
+  - Resolved in v2.1.0: Commit ([7b30d65](https://github.com/hardeepnarang10/fb2ics/commit/7b30d65e530d81b7a88b6797bef8e47f88bb0fbe)).
 
 ## Contributions
 
