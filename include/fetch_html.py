@@ -1,10 +1,17 @@
-from os import listdir, path
+from os import listdir, mkdir, path
 
 
 def target_file(resources_path, instruction_string):
 
+    nofilefound = "\nNo HTML file found in '" + resources_path.strip(".\\").strip("/") + "' folder.\n" + instruction_string
+
     # List all files in resources_path folder.
-    files_in_res_folder = listdir(resources_path)
+    try:
+        files_in_res_folder = listdir(resources_path)
+    except FileNotFoundError:
+        mkdir('resources')
+        print(nofilefound)
+        exit(-21)
 
     # Split filename and extension into tuples. Append these tuples into ext list object.
     ext_list = []
@@ -14,13 +21,12 @@ def target_file(resources_path, instruction_string):
     # Check for HTML files in resources_path folder.
     num_of_html_files = (str(ext_list).lower().count(".html"))
     if num_of_html_files < 1:
-        print("\nNo HTML file found in '" + resources_path.strip(".\\").strip("/") + "' folder.")
-        print(instruction_string)
-        exit(-1)
+        print(nofilefound)
+        exit(-21)
     elif num_of_html_files > 1:
         print("\nMany HTML files found in '" + resources_path.strip(".\\").strip("/") + "' folder.")     ######## Specify through args #######
         print("\nMake sure only the webpage with saved facebook birthdays information is placed in the '" + resources_path.strip(".\\") + "' folder.")
-        exit(-1)
+        exit(-22)
 
     # Return target HTML file (to scrape birthday info from) with relative path.
     for each_tuple in ext_list:
