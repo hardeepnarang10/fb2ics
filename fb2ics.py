@@ -69,7 +69,7 @@ def main():
     os.chdir(SAVE_DIR)
 
     # Write ICS file.
-    with open(OUTPUT_FILE, mode='w', newline='') as calendar_file:
+    with open(OUTPUT_FILE, mode='w', newline='', encoding='utf-8') as calendar_file:
         calendar_file.writelines(parsed_output)
         calendar_file.close()
 
