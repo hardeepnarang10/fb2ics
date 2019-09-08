@@ -54,12 +54,18 @@ This tool **does not** require facebook credentials.
 
 ## Version
 
+Version update: v2.2.0 release:
+
+- Nickname(s) identification.
+- Bad input classification.
+- [Resolved: Issue #6](../../issues/6).
+- [Resolved: Issue #5](../../issues/5).
+
 Version update: v2.1.0 release:
 
 - Extended locale support.
 - [Resolved: Issue #4](../../issues/4).
 - [Resolved: Issue #1](../../issues/1).
-- September 8, 2019 Update: [Resolved: Issue #5](../../issues/5).
 
 Version update: v2.0.0 release:
 
@@ -70,7 +76,7 @@ Version update: v1.1.0 release:
 
 - ~~[Resolved: Issue #1](../../issues/1)~~
   - September 7, 2019 Update: Issue wasn't completely resolved - as pointed out [here](../../issues/1#issuecomment-529092754).
-  - Resolved in v2.1.0: Commit ([8cdc02f](https://github.com/hardeepnarang10/fb2ics/commit/8cdc02fc35fec0839029c1231f3cd4a44521bd8e)).
+  - Resolved in v2.1.0: Commit ([ef1f296](https://github.com/hardeepnarang10/fb2ics/commit/ef1f296d49d575d27ada1ae43154888cdfe97e55)).
 
 ## Contributions
 
