@@ -25,10 +25,11 @@ def collective_scraper(scrape_line):
 
     # Scrape all needed content at once. Easy processing.
     raw_scrape_list = str(findall(r'\w*\s?\w*\s\w+\s\(\w*\d*/?\d*\)', scrape_line))
-
     name_date_list = name_date_scraper(raw_scrape_list)
-    name_day_list = name_day_scraper(raw_scrape_list)
-    return name_date_list + name_day_list
+    name_day_list = name_day_scraper(raw_scrape_list)[0]
+    nickname_list = name_day_scraper(raw_scrape_list)[1]
+    return ((name_date_list + name_day_list), nickname_list)    # Return tuple of list: #[0] Name vs date flat list.
+                                                                                        #[1] Nickname list (LOG list).
 
 
 def name_date_scraper(raw_list):
@@ -46,19 +47,24 @@ def name_date_scraper(raw_list):
 def name_day_scraper(raw_list):
     name_day = findall(r'\w*\s?\w*\s\w+\s\(\w+\)', raw_list)
     bday_list = []
+    nickname_entries = []
     for each_element in name_day:
         name = each_element[0:each_element.index('(')]
         date = each_element[(each_element.index('(') + 1):each_element.index(')')]
-        if (name + get_bday(date)) not in bday_list:
-            bday_list.append(name + get_bday(date))
-    return bday_list
+        try:                                                        # Friend list with nickname(s) raise error.
+            if (name + get_bday(date)) not in bday_list:
+                bday_list.append(name + get_bday(date))
+        except ValueError:
+            nickname_entries.append(name + '(' + date + ')')        # Log nickname entry to a list.
+            pass                                                    # Ignore processing of nickname entry.
+    return (bday_list, nickname_entries)
 
 
 def get_bday(day_of_the_week):
     present_day = dt.date(dt.datetime.now().year, dt.datetime.now().month, dt.datetime.now().day).weekday()
     two_weeks = list(WEEKDAYS + WEEKDAYS)
     if (WEEKDAYS.index(day_of_the_week) <= present_day):
-        two_weeks.remove(day_of_the_week)
-    difference_in_date = two_weeks.index(day_of_the_week) - two_weeks.index(WEEKDAYS[present_day])
+        two_weeks.remove(day_of_the_week)                           # Remove only first element of list.
+    difference_in_date = (two_weeks.index(day_of_the_week) - present_day + 1)   # Calculation hack.
     bday_date = dt.datetime.now() + dt.timedelta(days=difference_in_date)
     return ('(' + str(bday_date.month) + '/' + str(bday_date.day) + ')')

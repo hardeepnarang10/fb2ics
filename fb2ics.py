@@ -24,6 +24,7 @@ except ModuleNotFoundError:
 RESOURCE_PATH = "./resources"
 SAVE_DIR = "output"
 OUTPUT_FILE = "facebook_birthdays.ics"
+LOG_FILE = "missed_entries.log"
 INSTRUCTION_STRING = "\nGoto 'www.facebook.com/events/birthdays/',"\
                     + " remember to SCROLL DOWN TO THE BOTTOM and save the webpage in '"\
                      + RESOURCE_PATH.strip(".\\").strip("/") + "' folder.\n"
@@ -53,7 +54,7 @@ def main():
         exit(-12)
 
     # Scrape list with birthday info from string.
-    scrape_list = scraper.collective_scraper(scrape_line)
+    scrape_list = scraper.collective_scraper(scrape_line)[0]
 
     # Return list of tuples with uid(unique identifier, needed in ics module), name and birthday.
     processed_tuple = flat_list_to_tuple_list(scrape_list)
@@ -62,7 +63,12 @@ def main():
     try:
         parsed_output = parser.ics_parser(processed_tuple, 0)
     except ValueError:
-        parsed_output = parser.ics_parser(processed_tuple, 1)
+        try:
+            parsed_output = parser.ics_parser(processed_tuple, 1)
+        except ValueError:                                          # In case neither of two locale signatures match.
+            print("\nBad input: '" + args.filename + "' contains unsupported format." +
+                  "\n\nExiting program...")
+            exit(-14)
 
     # Check for SAVE_DIR folder in project directory. Create if not exist.
     if not os.path.exists(SAVE_DIR): os.mkdir(SAVE_DIR)
@@ -73,10 +79,27 @@ def main():
         calendar_file.writelines(parsed_output)
         calendar_file.close()
 
-    # Check if ICS file written.
+    # Check for missed entries.
+    if scraper.collective_scraper(scrape_line)[1]:
+        with open(LOG_FILE, mode='w', encoding='utf-8') as log_file:
+            for each_entry in scraper.collective_scraper(scrape_line)[1]:
+                log_file.write(each_entry + '\n')
+            log_file.close()
+        print("\n\nWARNING:\n" + os.path.basename(__file__) + " v" + __version__ + " (current) " +
+              "is unable to process birthday events which include brackets." +
+              "\nTip: Check for people with nicknames in your friend list.")
+    else:
+        pass
+
+    # Check if ICS and LOG file(s) are written.
     if os.path.isfile(OUTPUT_FILE):
-        print("\n\nProcess completed successfully.\n\nCheck '" + SAVE_DIR
-              + "' folder for '" + OUTPUT_FILE + "' file.\n")
+        print("\n\nProcess completed successfully.")
+        print("Check '" + SAVE_DIR + "' folder for '" + OUTPUT_FILE + "' file.")
+        if scraper.collective_scraper(scrape_line)[1] and os.path.isfile(LOG_FILE):
+            print("Also check '" + LOG_FILE + "' for missed birthdays." +
+                  " You may add these events manually to the calendar.\n")
+        else:
+            print("\n")
 
 
 def flat_list_to_tuple_list(flat_list):
