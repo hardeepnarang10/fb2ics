@@ -57,7 +57,7 @@ def name_day_scraper(raw_list):
 def get_bday(day_of_the_week):
     present_day = dt.date(dt.datetime.now().year, dt.datetime.now().month, dt.datetime.now().day).weekday()
     two_weeks = list(WEEKDAYS + WEEKDAYS)
-    if (WEEKDAYS.index(day_of_the_week) < present_day):
+    if (WEEKDAYS.index(day_of_the_week) <= present_day):
         two_weeks.remove(day_of_the_week)
     difference_in_date = two_weeks.index(day_of_the_week) - two_weeks.index(WEEKDAYS[present_day])
     bday_date = dt.datetime.now() + dt.timedelta(days=difference_in_date)
