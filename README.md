@@ -41,16 +41,22 @@ This tool **does not** require facebook credentials.
    
 2. Save Facebook Birthdays page:
    
-   - Visit <a href=" https://www.facebook.com/events/birthdays/">facebook birthdays page</a>.
+   - ~~Visit <a href=" https://www.facebook.com/events/birthdays/">facebook birthdays page</a>~~.
+     - Facebook figured out the exploit - They've put up request filters to ensure the referrer page must be their own. Follow these steps instead:
+     - Go to [facebook events page](https://www.facebook.com/events/) (Events page doesn't have a filter yet).
+     - Click on 'Birthdays' option in the top-left panel.
    - **Scroll till the end (must reach the current month of next year)**.
    - Save page (Press Ctrl + S or Command +S).
+   
 3. Copy the saved HTML file to 'resources' folder in the project directory.
    (**HTML file must be saved the same day this script is executed**).
 
 4. Windows users run `Installer_Windows.bat` file.
    Linux (and Mac) users run `Installer_Linux.sh` file. (Linux users may need to issue `chmod +x Installer_Linux.sh` command first).
 
-5. Check 'output' folder for .ical file. 
+5. Check 'output' folder for .ical file.
+
+**Note**: If you run into an issue during the procedure, write me @hardeepnarang10@gmail.com. I will assist you resolve the issue and it'll help other people who've run into same problem as yourself by keeping me updated on what I need to simplify.
 
 ## Version
 
