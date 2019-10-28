@@ -10,15 +10,21 @@ def scrape_line_selector(file_name):
     raw_content = html_file.readlines()
     html_file.close()
 
+    # Match line may contain non-carriage returns
+    return_line = str()
+
     # MATCH_LINE already known.
     MATCH_LINE = '" class="link" data-jsid="anchor" data-hover="tooltip" data-tooltip-content="'
 
     for each_line in raw_content:
         try:
             if MATCH_LINE in each_line:
-                return each_line
+                return_line = return_line + each_line
         except UnicodeDecodeError:
             pass
+    
+    # Return concatenated string with required data
+    return return_line
 
 
 def collective_scraper(scrape_line):
