@@ -64,9 +64,32 @@ def main():
         # Parse fetched info to final ICS (calendar) file.
         parsed_output = parser.ics_parser(processed_tuple, 0)
 
-    except ValueError:
-        try:
 
+        # Check for SAVE_DIR folder in project directory. Create if not exist.
+        if not os.path.exists(SAVE_DIR): os.mkdir(SAVE_DIR)
+        os.chdir(SAVE_DIR)
+
+        # Write ICS file.
+        with open(OUTPUT_FILE, mode='w', newline='', encoding='utf-8') as calendar_file:
+            calendar_file.writelines(parsed_output)
+            calendar_file.close()
+
+        # Check for missed entries.
+        # if scraper.collective_scraper(scrape_line)[1]:
+        if missed_log:
+            with open(LOG_FILE, mode='w', encoding='utf-8') as log_file:
+                for each_entry in scraper.collective_scraper(scrape_line, 0)[1]:
+                    log_file.write(each_entry + '\n')
+                log_file.close()
+            print("\n\nWARNING:\n" + os.path.basename(__file__) + " v" + __version__ + " (current) " +
+                  "is unable to process birthday events which include brackets." +
+                  "\nTip: Check for people with nicknames in your friend list.")
+        else:
+            pass
+
+    except ValueError:
+
+        try:
             # Scrape list with birthday info from string.
             scrape_list, missed_log = scraper.collective_scraper(scrape_line, 1)
 
@@ -76,32 +99,33 @@ def main():
             # Parse fetched info to final ICS (calendar) file.
             parsed_output = parser.ics_parser(processed_tuple, 1)
 
+            # Check for SAVE_DIR folder in project directory. Create if not exist.
+            if not os.path.exists(SAVE_DIR): os.mkdir(SAVE_DIR)
+            os.chdir(SAVE_DIR)
+
+            # Write ICS file.
+            with open(OUTPUT_FILE, mode='w', newline='', encoding='utf-8') as calendar_file:
+                calendar_file.writelines(parsed_output)
+                calendar_file.close()
+
+            # Check for missed entries.
+            # if scraper.collective_scraper(scrape_line)[1]:
+            if missed_log:
+                with open(LOG_FILE, mode='w', encoding='utf-8') as log_file:
+                    for each_entry in scraper.collective_scraper(scrape_line, 1)[1]:
+                        log_file.write(each_entry + '\n')
+                    log_file.close()
+                print("\n\nWARNING:\n" + os.path.basename(__file__) + " v" + __version__ + " (current) " +
+                      "is unable to process birthday events which include brackets." +
+                      "\nTip: Check for people with nicknames in your friend list.")
+            else:
+                pass
+
         except ValueError:                                          # In case neither of two locale signatures match.
             print("\nBad input: '" + args.filename + "' contains unsupported format." +
                   "\n\nExiting program...")
             exit(-14)
 
-    # Check for SAVE_DIR folder in project directory. Create if not exist.
-    if not os.path.exists(SAVE_DIR): os.mkdir(SAVE_DIR)
-    os.chdir(SAVE_DIR)
-
-    # Write ICS file.
-    with open(OUTPUT_FILE, mode='w', newline='', encoding='utf-8') as calendar_file:
-        calendar_file.writelines(parsed_output)
-        calendar_file.close()
-
-    # Check for missed entries.
-    # if scraper.collective_scraper(scrape_line)[1]:
-    if missed_log:
-        with open(LOG_FILE, mode='w', encoding='utf-8') as log_file:
-            for each_entry in scraper.collective_scraper(scrape_line)[1]:
-                log_file.write(each_entry + '\n')
-            log_file.close()
-        print("\n\nWARNING:\n" + os.path.basename(__file__) + " v" + __version__ + " (current) " +
-              "is unable to process birthday events which include brackets." +
-              "\nTip: Check for people with nicknames in your friend list.")
-    else:
-        pass
 
     # Check if ICS and LOG file(s) are written.
     if os.path.isfile(OUTPUT_FILE):
