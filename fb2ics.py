@@ -53,18 +53,29 @@ def main():
         print('\n' + valerr.args[0] + '\n' + valerr.args[1])
         exit(-12)
 
-    # Scrape list with birthday info from string.
-    scrape_list = scraper.collective_scraper(scrape_line)[0]
-
-    # Return list of tuples with uid(unique identifier, needed in ics module), name and birthday.
-    processed_tuple = flat_list_to_tuple_list(scrape_list)
-
-    # Parse fetched info to final ICS (calendar) file.
     try:
+
+        # Scrape list with birthday info from string.
+        scrape_list, missed_log = scraper.collective_scraper(scrape_line, 0)
+
+        # Return list of tuples with uid(unique identifier, needed in ics module), name and birthday.
+        processed_tuple = flat_list_to_tuple_list(scrape_list)
+
+        # Parse fetched info to final ICS (calendar) file.
         parsed_output = parser.ics_parser(processed_tuple, 0)
+
     except ValueError:
         try:
+
+            # Scrape list with birthday info from string.
+            scrape_list, missed_log = scraper.collective_scraper(scrape_line, 1)
+
+            # Return list of tuples with uid(unique identifier, needed in ics module), name and birthday.
+            processed_tuple = flat_list_to_tuple_list(scrape_list)
+
+            # Parse fetched info to final ICS (calendar) file.
             parsed_output = parser.ics_parser(processed_tuple, 1)
+
         except ValueError:                                          # In case neither of two locale signatures match.
             print("\nBad input: '" + args.filename + "' contains unsupported format." +
                   "\n\nExiting program...")
@@ -80,7 +91,8 @@ def main():
         calendar_file.close()
 
     # Check for missed entries.
-    if scraper.collective_scraper(scrape_line)[1]:
+    # if scraper.collective_scraper(scrape_line)[1]:
+    if missed_log:
         with open(LOG_FILE, mode='w', encoding='utf-8') as log_file:
             for each_entry in scraper.collective_scraper(scrape_line)[1]:
                 log_file.write(each_entry + '\n')
@@ -95,7 +107,7 @@ def main():
     if os.path.isfile(OUTPUT_FILE):
         print("\n\nProcess completed successfully.")
         print("Check '" + SAVE_DIR + "' folder for '" + OUTPUT_FILE + "' file.")
-        if scraper.collective_scraper(scrape_line)[1] and os.path.isfile(LOG_FILE):
+        if missed_log and os.path.isfile(LOG_FILE):
             print("Also check '" + LOG_FILE + "' for missed birthdays." +
                   " You may add these events manually to the calendar.\n")
         else:
