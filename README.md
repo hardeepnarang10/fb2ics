@@ -1,3 +1,16 @@
+## MAY 2020 UPDATE:
+
+Facebook has radically changed their data formatting along with other big changes which effectively renders this script useless. Unfortunately, I'm busy with some other projects and can't keep up with further maintenance of this one.
+
+This repo was my first publication and knowing that it helped people in many ways makes me happy - I still have some old emails from people thanking me or the ones who seeked help - which I'll be archiving soon, just like this one.
+
+If you're visiting this page looking to extract birthdays info from facebook, you might want to checkout **[this chrome extension](https://chrome.google.com/webstore/detail/birthday-calendar-extract/imielmggcccenhgncmpjlehemlinhjjo)** from Peter Pshenichny, which is hopefully maintained by the time you're reading this.
+
+Best,\
+Hardeep.
+
+#
+
 <p align="center">
 <img src="https://i.imgur.com/ToHPLjD.png" height="110px" width="auto"/>
 <br/>
